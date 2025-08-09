@@ -1,0 +1,673 @@
+/* src/App.css */
+
+/* ================ */
+/* 1. BASE SETUP */
+/* ================ */
+
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap');
+
+/* CSS Variables with new color palette */
+:root {
+  /* Primary Colors */
+  --primary-50: #f0f4ff;
+  --primary-100: #d6e4ff;
+  --primary-200: #adc8ff;
+  --primary-300: #7fa6ff;
+  --primary-400: #5283ff;
+  --primary-500: #2562ff;
+  --primary-600: #1a4dcc;
+  --primary-700: #0f3899;
+  --primary-800: #092266;
+  --primary-900: #030c33;
+  
+  /* Accent Colors */
+  --accent-100: #ffe5f1;
+  --accent-200: #ffb8d9;
+  --accent-300: #ff8ac1;
+  --accent-400: #ff5ca9;
+  --accent-500: #ff2e91;
+  --accent-600: #cc2474;
+  --accent-700: #991a57;
+  
+  /* Neutral Colors */
+  --neutral-50: #f8fafc;
+  --neutral-100: #f1f5f9;
+  --neutral-200: #e2e8f0;
+  --neutral-300: #cbd5e1;
+  --neutral-400: #94a3b8;
+  --neutral-500: #64748b;
+  --neutral-600: #475569;
+  --neutral-700: #334155;
+  --neutral-800: #1e293b;
+  --neutral-900: #0f172a;
+  
+  /* Success/Error Colors */
+  --success: #10b981;
+  --error: #ef4444;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 2rem;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(135deg, var(--neutral-50) 0%, var(--neutral-100) 100%);
+  color: var(--neutral-800);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ================ */
+/* 2. LAYOUT */
+/* ================ */
+
+.container {
+  width: 100%;
+  max-width: 720px;
+  background: rgba(255, 255, 255, 0.98);
+  padding: 3rem;
+  border-radius: var(--radius-xl);
+  box-shadow: 
+    var(--shadow-xl),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.container:hover {
+  transform: translateY(-0.5rem);
+  box-shadow:
+    var(--shadow-xl),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+/* ================ */
+/* 3. TYPOGRAPHY */
+/* ================ */
+
+h1, h2, h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 0;
+}
+
+h2 {
+  margin: 0 auto 2.5rem;
+  font-size: 2.25rem;
+  background: linear-gradient(90deg, var(--primary-500) 0%, var(--primary-700) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4rem;
+  height: 0.25rem;
+  background: linear-gradient(90deg, var(--accent-500) 0%, var(--accent-700) 100%);
+  border-radius: var(--radius-full);
+}
+
+p {
+  margin-bottom: 1.5rem;
+  color: var(--neutral-600);
+}
+
+/* ================ */
+/* 4. FORM ELEMENTS */
+/* ================ */
+
+form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.input-group {
+  flex: 1;
+  min-width: 18rem;
+  max-width: 32rem;
+  position: relative;
+}
+
+input[type="url"] {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  border: 2px solid var(--neutral-200);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-normal);
+  background: var(--neutral-50);
+  box-shadow: var(--shadow-sm);
+  color: var(--neutral-800);
+}
+
+input[type="url"]:focus {
+  border-color: var(--primary-400);
+  outline: none;
+  box-shadow: 
+    0 0 0 4px rgba(37, 98, 255, 0.1),
+    var(--shadow-md);
+  background: white;
+}
+
+input[type="url"]::placeholder {
+  color: var(--neutral-400);
+  opacity: 1;
+}
+
+/* ================ */
+/* 5. BUTTONS */
+/* ================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-md);
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  min-width: 10rem;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0));
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.btn:hover::after {
+  opacity: 1;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, var(--primary-400) 0%, var(--primary-500) 100%);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--primary-600);
+  border: 2px solid var(--primary-200);
+}
+
+.btn-secondary:hover {
+  background: var(--primary-50);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-sm {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  min-width: auto;
+}
+
+/* ================ */
+/* 6. RESULT DISPLAY */
+/* ================ */
+
+.result-container {
+  margin: 2.5rem 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(248, 249, 250, 0.95) 0%, rgba(240, 249, 255, 0.95) 100%);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--accent-500);
+  animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.result-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-500) 0%, var(--primary-500) 100%);
+}
+
+.short-url {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: var(--neutral-800);
+  word-break: break-all;
+}
+
+.short-url a {
+  color: var(--primary-600);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  position: relative;
+  padding-bottom: 0.25rem;
+}
+
+.short-url a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--transition-normal);
+}
+
+.short-url a:hover {
+  color: var(--primary-500);
+}
+
+.short-url a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ================ */
+/* 7. STATS & ANALYTICS */
+/* ================ */
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  text-align: center;
+  border-top: 3px solid var(--primary-400);
+}
+
+.stat-card:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-600);
+  margin-bottom: 0.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.stat-label {
+  color: var(--neutral-500);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ================ */
+/* 8. DATA TABLE */
+/* ================ */
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin: 2.5rem 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+thead tr {
+  background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+}
+
+th {
+  padding: 1rem 1.5rem;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--neutral-200);
+  text-align: center;
+  color: var(--neutral-700);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background-color: var(--primary-50);
+}
+
+/* ================ */
+/* 9. QR CODE */
+/* ================ */
+
+.qr-container {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: white;
+  border-radius: var(--radius-lg);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--neutral-200);
+}
+
+.qr-title {
+  margin-bottom: 1rem;
+  color: var(--neutral-700);
+  font-weight: 600;
+}
+
+/* ================ */
+/* 10. ANIMATIONS */
+/* ================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* ================ */
+/* 11. UTILITY CLASSES */
+/* ================ */
+
+.text-center {
+  text-align: center;
+}
+
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mb-5 { margin-bottom: 2rem; }
+
+/* ================ */
+/* 12. DECORATIVE ELEMENTS */
+/* ================ */
+
+.decoration {
+  position: fixed;
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(80px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.decoration-1 {
+  width: 30rem;
+  height: 30rem;
+  background: var(--primary-400);
+  top: -10rem;
+  left: -10rem;
+  animation: float 12s ease-in-out infinite;
+}
+
+.decoration-2 {
+  width: 40rem;
+  height: 40rem;
+  background: var(--accent-400);
+  bottom: -15rem;
+  right: -10rem;
+  animation: float 15s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(3rem, 5rem);
+  }
+}
+
+/* ================ */
+/* 13. RESPONSIVE DESIGN */
+/* ================ */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 2rem 1.5rem;
+    border-radius: var(--radius-lg);
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  .input-group {
+    min-width: 100%;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+  
+  .stats-container {
+    grid-template-columns: 1fr;
+  }
+  
+  table {
+    font-size: 0.875rem;
+  }
+  
+  th, td {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 1rem;
+  }
+  
+  .container {
+    padding: 1.5rem 1rem;
+  }
+  
+  .result-container {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* ================ */
+/* 14. MICROINTERACTIONS */
+/* ================ */
+
+.copy-btn.copied {
+  background: var(--success);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+  animation: bounce 0.5s;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.25rem); }
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-left: 0.5rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Tooltip */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 8rem;
+  background-color: var(--neutral-800);
+  color: white;
+  text-align: center;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  font-size: 0.75rem;
+}
+
+.tooltip .tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--neutral-800) transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
